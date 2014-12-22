@@ -1,6 +1,6 @@
 {
-  "name": "pointer-trap",
-  "version": "0.0.0",
+  "name": "pointer-trap-relative",
+  "version": "1.0.0",
   "description": "Trap the user's cursor within an element for nicer game controls.",
   "main": "index.js",
   "dependencies": {
@@ -8,12 +8,16 @@
     "through": "~2.3.4",
     "pointer-lock": "~0.0.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "loadandrunscripts": "^1.0.0",
+    "threejs-managed-view": "^2.4.0"
+  },
   "scripts": {
+    "test": "beefy test.js --live --open"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hughsk/poitner-trap.git"
+    "url": "git://github.com/bunnybones1/pointer-trap-relative.git"
   },
   "keywords": [
     "pointer",
@@ -24,7 +28,10 @@
     "constrain",
     "bounds"
   ],
-  "author": "Hugh Kennedy <hughskennedy@gmail.com> (http://hughskennedy.com/)",
+  "authors": [
+    "Hugh Kennedy <hughskennedy@gmail.com> (http://hughskennedy.com/)",
+    "Tomasz Dysinski <oz@bunnybones.com> (http://bunnybones.com/)"
+  ],
   "license": "MIT",
   "readmeFilename": "README.md"
 }

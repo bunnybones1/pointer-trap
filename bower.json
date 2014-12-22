@@ -1,0 +1,20 @@
+{
+  "name": "pointer-trap-relative",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/bunnybones1/pointer-trap-relative",
+  "authors": [
+    "Tomasz Dysinski <oz@bunnybones.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "three.js": "*"
+  }
+}

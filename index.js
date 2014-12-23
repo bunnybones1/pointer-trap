@@ -34,8 +34,8 @@ function trap(element, mode) {
     if (output.trapped) return
     if(lastX === undefined) lastX = e.pageX;
     if(lastY === undefined) lastY = e.pageY;
-    move.dx = lastX - e.pageX;
-    move.dy = lastY - e.pageY;
+    move.dx = e.pageX - lastX;
+    move.dy = e.pageY - lastY;
     lastX = e.pageX;
     lastY = e.pageY;
     output.write(move);

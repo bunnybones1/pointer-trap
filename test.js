@@ -22,6 +22,7 @@ loadAndRunScripts(
 			canvasContainer: containerDiv
 		});
 		var scene = view.scene;
+		var camera = view.camera;
 
 		var sphereGeometry = new THREE.SphereGeometry(.5);
 		var size = 100;
@@ -32,7 +33,7 @@ loadAndRunScripts(
 		)
 		var random = new THREE.Vector3();
 		var boundSize = bounds.size();
-		for (var i = 0; i < 100; i++) {
+		for (var i = 0; i < 1000; i++) {
 			var ball = new THREE.Mesh(sphereGeometry);
 			scene.add(ball);
 			random.set(
@@ -43,9 +44,11 @@ loadAndRunScripts(
 			ball.position.copy(bounds.min).add(random.multiply(boundSize));
 		};
 
+		var rotationSpeed = .001;
 		var pointerTrap = new PointerTrap(containerDiv);
 		pointerTrap.on('data', function(pos) {
-			console.log(pos.x, pos.y);
+			camera.rotateY(pos.x * -rotationSpeed);
+			camera.rotateX(pos.y * -rotationSpeed);
 		})
 
 

@@ -6,7 +6,22 @@ var lock = require('pointer-lock')
 
 module.exports = trap
 
-function trap(element) {
+function trap(element, mode) {
+  var write;
+  switch(mode) {
+    case 'deltas':
+      write = writeDeltas;
+      break;
+    case 'clamped':
+      write = writeClamped;
+      break;
+    case 'unclamped':
+      write = writeUnclamped;
+      break;
+    default:
+      write = writeDeltas;
+  }
+
   var pointer = lock(element)
     , output = through(write)
     , pos = output.pos = {}
@@ -14,11 +29,16 @@ function trap(element) {
   output.trapped = false
 
   element.style.cursor = 'none'
+  var lastX, lastY, move = {dx:0, dy:0};
   element.addEventListener('mousemove', function(e) {
     if (output.trapped) return
-    pos.x = min(max(0, e.offsetX), element.clientWidth)
-    pos.y = min(max(0, e.offsetY), element.clientHeight)
-    output.queue(pos)
+    if(lastX === undefined) lastX = e.offsetX; 
+    if(lastY === undefined) lastY = e.offsetY;
+    move.dx = lastX - e.offsetX;
+    move.dy = lastY - e.offsetY;
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+    output.write(move);
   })
 
   element.addEventListener('click', function(e) {
@@ -50,11 +70,23 @@ function trap(element) {
     }).request()
   })
 
-  function write(move) {
+  function writeClamped(move) {
     pos.x += move.dx
     pos.y += move.dy
     pos.x = min(max(pos.x, 0), element.clientWidth)
     pos.y = min(max(pos.y, 0), element.clientHeight)
+    this.queue(pos)
+  }
+
+  function writeUnclamped(move) {
+    pos.x += move.dx
+    pos.y += move.dy
+    this.queue(pos)
+  }
+
+  function writeDeltas(move) {
+    pos.x = move.dx
+    pos.y = move.dy
     this.queue(pos)
   }
 

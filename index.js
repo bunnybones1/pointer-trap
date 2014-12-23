@@ -32,19 +32,19 @@ function trap(element, mode) {
   var lastX, lastY, move = {dx:0, dy:0};
   element.addEventListener('mousemove', function(e) {
     if (output.trapped) return
-    if(lastX === undefined) lastX = e.offsetX; 
-    if(lastY === undefined) lastY = e.offsetY;
-    move.dx = lastX - e.offsetX;
-    move.dy = lastY - e.offsetY;
-    lastX = e.offsetX;
-    lastY = e.offsetY;
+    if(lastX === undefined) lastX = e.pageX; 
+    if(lastY === undefined) lastY = e.pageY;
+    move.dx = lastX - e.pageX;
+    move.dy = lastY - e.pageY;
+    lastX = e.pageX;
+    lastY = e.pageY;
     output.write(move);
   })
 
   element.addEventListener('click', function(e) {
     if (output.trapped) return
-    pos.x = e.offsetX
-    pos.y = e.offsetY
+    pos.x = e.pageX
+    pos.y = e.pageY
     pointer.request()
   })
 

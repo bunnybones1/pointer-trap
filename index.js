@@ -1,4 +1,4 @@
-var lock = require('pointer-lock')
+var lock = require('pointer-lock-chrome-tolerant')
   , fullscreen = require('fullscreen')
   , through = require('through')
   , min = Math.min
@@ -32,7 +32,7 @@ function trap(element, mode) {
   var lastX, lastY, move = {dx:0, dy:0};
   element.addEventListener('mousemove', function(e) {
     if (output.trapped) return
-    if(lastX === undefined) lastX = e.pageX; 
+    if(lastX === undefined) lastX = e.pageX;
     if(lastY === undefined) lastY = e.pageY;
     move.dx = lastX - e.pageX;
     move.dy = lastY - e.pageY;

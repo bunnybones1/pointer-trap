@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "fullscreen": "~0.0.1",
-    "pointer-lock-chrome-tolerant": "0.0.6",
+    "pointer-lock-chrome-tolerant": "0.0.7",
     "through": "~2.3.4"
   },
   "devDependencies": {

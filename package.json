@@ -6,6 +6,7 @@
   "dependencies": {
     "fullscreen": "~0.0.1",
     "pointer-lock-chrome-tolerant": "0.0.7",
+    "signals": "^1.0.0",
     "through": "~2.3.4"
   },
   "devDependencies": {

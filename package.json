@@ -1,6 +1,6 @@
 {
   "name": "pointer-trap-relative",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Trap the user's cursor within an element for nicer game controls.",
   "main": "index.js",
   "dependencies": {

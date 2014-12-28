@@ -3,6 +3,7 @@ var lock = require('pointer-lock-chrome-tolerant')
   , through = require('through')
   , min = Math.min
   , max = Math.max
+  , signals = require('signals');
 
 module.exports = trap
 
@@ -25,8 +26,12 @@ function trap(element, mode) {
   var pointer = lock(element)
     , output = through(write)
     , pos = output.pos = {}
+    , onAttainSignal = new signals.Signal()
+    , onReleaseSignal = new signals.Signal()
 
   output.trapped = false
+  output.onAttainSignal = onAttainSignal;
+  output.onReleaseSignal = onReleaseSignal;
 
   element.style.cursor = 'none'
   var lastX, lastY, move = {dx:0, dy:0};
@@ -51,14 +56,17 @@ function trap(element, mode) {
   pointer.on('attain', function(movements) {
     output.trapped = true
     movements.pipe(output, { end: false })
+    onAttainSignal.dispatch();
   })
 
   pointer.on('release', function() {
     output.trapped = false
+    onReleaseSignal.dispatch();
   })
 
   pointer.on('error', function(e) {
     output.trapped = false
+    onReleaseSignal.dispatch();
   })
 
   // workaround for browsers which only
